@@ -1,0 +1,53 @@
+### GET de getItems para ver todos los comercios
+GET http://localhost:3000/api/commerce HTTP/1.1
+
+### GET de getItem para ver el comercio que quieras a través del CIF
+GET http://localhost:3000/api/commerce/2 HTTP/1.1
+
+### POST para guardar un nuevo comercio
+POST http://localhost:3000/api/commerce HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Burger King",
+  "cif": "1",
+  "address": "paseo de la Castellana 89",
+  "email": "email@example.com",
+  "phone": "722453683"
+}
+
+### 
+POST http://localhost:3000/api/commerce HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Leroy Merlin",
+  "cif": "2",
+  "address": "calle andalucia 4",
+  "email": "email2@example.com",
+  "phone": "654732485"
+}
+
+###
+POST http://localhost:3000/api/commerce HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Cristales Alfonso",
+  "cif": "3",
+  "address": "calle pintor velazquez 8",
+  "email": "email3@example.com",
+  "phone": "633766612"
+}
+
+### PUT para modificar comercio a través de su CIF
+PUT http://localhost:3000/api/commerce/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "McDonalds",
+  "address": "paseo de la Castellana 20"
+}
+
+### DELETE para borrar un comercio a través del CIF
+DELETE http://localhost:3000/api/commerce/1 HTTP/1.1
