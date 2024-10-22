@@ -1,16 +1,21 @@
-const express = require("express")
+const express = require("express"); //Importa el framework Express
+const dbConnect = require("./config/mongo.js"); //Importa la función de conexión a MongoDB
+require("dotenv").config(); //Carga variables de entorno desde el archivo .env
 
-const dbConnect = require("./config/mongo.js")
-require("dotenv").config();
-const app = express();
+const app = express(); //Inicializa la aplicación de Express
 
-app.use(express.json())
+app.use(express.json()); //Middleware para manejar datos en formato JSON
 
-app.use("/api", require("./routes")) 
+//Define las rutas de la api que están en el archivo ./routes bajo el prefijo /api
+app.use("/api", require("./routes"));
+
+//Sirve archivos estáticos desde el directorio uploads
+app.use('/uploads', express.static('uploads'));
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, ()=>{
-    console.log(`Server is running en el puerto ${port}`)
-    dbConnect()
-})
+//Inicia el servidor y hace la conexion a la base de datos
+app.listen(port, () => {
+    console.log(`Server is running en el puerto ${port}`);
+    dbConnect(); //Conecta a la base de datos MongoDB
+});
