@@ -11,6 +11,10 @@ const commerceScheme = new mongoose.Schema( //Aquí basicamente encontramos el e
       unique: true,
     },
 
+    jwt: {
+      type: String,
+    },
+
     address: {
       type: String,
     },

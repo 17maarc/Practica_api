@@ -11,6 +11,7 @@ const dbConnect = () => {
     console.error("Error conectando a la BD:", error);
   }
 
+  // Listen to events
   mongoose.connection.on('connected', () => console.log("Conectado a la BD"));
 };
 

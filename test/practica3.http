@@ -1,0 +1,147 @@
+### Registro de Usuario
+POST http://localhost:3000/api/user/register
+Content-Type: application/json
+
+{
+    "name": "porfin",
+    "email": "ejemplo100@email.com",
+    "password": "contraseña",
+    "age": 20,
+    "city": "Madrid",
+    "interests": ["tecnología", "música"]
+}
+
+### Login de Usuario
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "ejemplo100@email.com",
+    "password": "contraseña"
+}
+
+### Actualizar Perfil de Usuario
+PUT http://localhost:3000/api/user/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIyNjlmMzRjNTdhYTkxN2YzMGZjNmIiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNzMwMzA4NTk1LCJleHAiOjE3MzAzNDQ1OTV9.DyCf_VupBZzAce0yI1oGeWpPO5oKz-eQwrvbWIO-yso
+
+{
+    "name": "Nuevo Nombre",
+    "email": "nuevoemail@example.com",
+    "age": 30,
+    "city": "Nueva Ciudad"
+}
+
+###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "nuevoemail@example.com",
+    "password": "contraseña"
+}
+
+### Eliminar Perfil de Usuario
+DELETE http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIyNGFjZTg3Y2ZkZjVjZTgzZTM4YTMiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNzMwMzAwNzI2LCJleHAiOjE3MzAzMDc5MjZ9.WQGKUAzKUiFrLAVXxGIV99ubxwJZ7WzL3taUEM9vdsA
+
+### Crear comercio
+POST http://localhost:3000/api/commerce/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIzOTlhZjlkZmQ4MmI0ZTNmZjUyMWEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzAzODY1MzAsImV4cCI6MTczMDQyMjUzMH0.jI5XBLFqJF69nqWdcnNLzzg6lnzqsk5lQaL494dvppM
+
+{
+    "name": "ejemplo comercio",
+    "cif": "987654321",
+    "email": "comercioejemplo@example.com",
+    "phone": "000000000",
+    "address": "Dirección del Comercio"
+}
+
+### Ver comercio
+GET http://localhost:3000/api/commerce/987654321
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### Actualizar comercio
+PUT http://localhost:3000/api/commerce/987654321
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+{
+    "name": "ejemplo 10000000",
+    "email": "nuevoemail1000@example.com",
+    "phone": "123456784",
+    "address": "mostoles central"
+}
+
+### Eliminar comercio
+DELETE http://localhost:3000/api/commerce/987654321
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### WEBS
+
+
+### Obtener una página web por id
+GET http://localhost:3000/api/webCommerce/67239a9d0e28e530a82c1d90
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### Crear una nueva página web
+POST http://localhost:3000/api/webCommerce
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+Content-Type: application/json
+
+{
+    "city": "Madrid",
+    "activity": "Tecnología",
+    "title": "Página Web de Tecnología",
+    "summary": "Esta es una página dedicada a las últimas noticias y avances en tecnología.",
+    "texts": [
+        "Texto 1 sobre tecnología.",
+        "Texto 2 sobre tecnología."
+    ],
+    "images": [],
+    "reviews": {
+        "scoring": 4,
+        "totalRatings": 10,
+        "reviewTexts": [
+            "Gran página, muy informativa.",
+            "Me encanta el contenido que ofrecen."
+        ]
+    }
+}
+
+### Actualizar una página web por id
+PUT http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+Content-Type: application/json
+
+{
+    "field1": "nuevo valor 1",
+    "field2": "nuevo valor 2"
+    // Otros campos a actualizar
+}
+
+### Eliminar una página web (borrado logico)
+DELETE http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61?soft=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### Borrado fisico
+DELETE http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### Subir imagen
+### PATCH para postear una imagen vinculada a la web
+PATCH http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61/upload
+Content-Type: multipart/form-data; boundary=Boundary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+--Boundary
+Content-Disposition: form-data; name="image"; filename="travis.jpg"
+Content-Type: image/jpeg
+
+< ./example.jpg
+--Boundary--
+
+### Ver emails 
+GET http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61/interested?interests=tecnología
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
