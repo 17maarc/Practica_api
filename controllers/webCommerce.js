@@ -4,27 +4,14 @@ const { verifyToken } = require('../middleware/authJWT'); // Importa el middlewa
 // Función para obtener todas las páginas web del comercio
 const getWebpages = async (req, res) => {
     try {
-        const token = req.headers.authorization?.split(" ")[1]; // Extrae el token del encabezado
-        const decoded = verifyToken(token); // Verifica el token
-
-        // Comprueba si el token es válido
-        if (!decoded) {
-            return res.status(401).json({ message: 'Token inválido' });
-        }
-
-        // Verifica que el comercio exista
-        const commerce = await commerceModel.findOne({ cif: decoded.cif });
-        if (!commerce) {
-            return res.status(404).json({ message: 'Comercio no encontrado' });
-        }
-
-        // Obtiene todas las páginas web del comercio
-        const data = await webModel.find({ commerce: commerce._id });
+        // Obtiene todas las páginas web y excluye el campo `_id`
+        const data = await webModel.find().select("-_id"); 
         res.send({ data });
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener las páginas web', error });
     }
 };
+
 
 // Función para buscar una página web específica
 const getWebpage = async (req, res) => {

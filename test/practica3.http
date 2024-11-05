@@ -82,8 +82,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1O
 
 
 ### Obtener una página web por id
-GET http://localhost:3000/api/webCommerce/67239a9d0e28e530a82c1d90
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+GET http://localhost:3000/api/webCommerce
 
 ### Crear una nueva página web
 POST http://localhost:3000/api/webCommerce

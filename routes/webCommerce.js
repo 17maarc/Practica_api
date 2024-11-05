@@ -4,7 +4,7 @@ const { validateCreateWebpage, validateUpdateWebpage, validateGetWebpage } = req
 const validateResults = require('../utils/validator'); // Importa el middleware que maneja los resultados de validación
 const upload = require('../middleware/multer'); // Importa el middleware para manejar la subida de archivos
 const { getWebpages, getWebpage, createWebpage, updateWebpage, archiveWebpage, deleteWebpage, UploadImage, getEmailsByActivity } = require('../controllers/webCommerce');
-const { authMiddleware } = require('../middleware/authJWT'); // Asegúrate de tener el middleware de autenticación
+const { authMiddleware } = require('../middleware/authJWT');
 
 /**
  * @swagger
@@ -41,7 +41,7 @@ const { authMiddleware } = require('../middleware/authJWT'); // Asegúrate de te
  *        401:
  *          description: No autorizado
  */
-router.get('/', authMiddleware, getWebpages); // Obtiene todas las páginas web
+router.get('/', getWebpages); // Obtiene todas las páginas web
 
 /**
  * @swagger
