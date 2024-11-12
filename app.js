@@ -2,7 +2,7 @@ const express = require("express"); // Importa el módulo Express
 const dbConnect = require("./config/mongo.js"); // Conexión a la base de datos
 require("dotenv").config(); // Carga las variables de entorno
 const swaggerUi = require("swagger-ui-express"); // Configura Swagger UI
-const swaggerDocs = require("./config/swagger.js"); // Documentación de Swagger
+const swaggerDocs = require("./docs/swagger.js"); // Documentación de Swagger
 const cors = require('cors'); // Middleware para habilitar CORS
 const morganBody = require("morgan-body"); // Middleware para logging
 const loggerStream = require('./utils/handleLogger'); // Stream para logs
@@ -10,11 +10,7 @@ const loggerStream = require('./utils/handleLogger'); // Stream para logs
 const app = express(); // Crea una instancia de Express
 
 // Configuración de CORS
-app.use(cors({
-    origin: '*', // Permite solicitudes desde cualquier origen
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Métodos permitidos
-    allowedHeaders: "Content-Type,Authorization" // Cabeceras permitidas
-}));
+app.use(cors());
 
 app.use(express.json()); // Middleware para parsear JSON
 
@@ -34,7 +30,7 @@ app.use("/api", require("./routes")); // Carga las rutas definidas
 app.use('/uploads', express.static('uploads')); // Servir archivos estáticos
 
 // Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Configura la documentación de Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Configura la documentación de Swagger
 
 // Manejo de errores
 // app.use(handleHttpError); // Asegúrate de que esté habilitado y configurado correctamente

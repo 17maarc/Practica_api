@@ -3,8 +3,8 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-    "name": "porfin",
-    "email": "ejemplo100@email.com",
+    "name": "Ricardo",
+    "email": "ricardo@email.com",
     "password": "contraseña",
     "age": 20,
     "city": "Madrid",
@@ -16,18 +16,18 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "ejemplo100@email.com",
+    "email": "ricardo@email.com",
     "password": "contraseña"
 }
 
 ### Actualizar Perfil de Usuario
 PUT http://localhost:3000/api/user/update
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIyNjlmMzRjNTdhYTkxN2YzMGZjNmIiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNzMwMzA4NTk1LCJleHAiOjE3MzAzNDQ1OTV9.DyCf_VupBZzAce0yI1oGeWpPO5oKz-eQwrvbWIO-yso
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzMzNjE3ZDFmZWI2YzFjNzg0ODQ5ZDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMTQyMDU0MSwiZXhwIjoxNzMxNDU2NTQxfQ.wc9kEXrnXx8CJsTdBVjFQMA_NUn3J3T0nS38keuv3es
 
 {
-    "name": "Nuevo Nombre",
-    "email": "nuevoemail@example.com",
+    "name": "ricardo2",
+    "email": "ricardo2@example.com",
     "age": 30,
     "city": "Nueva Ciudad"
 }
@@ -37,7 +37,7 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "nuevoemail@example.com",
+    "email": "ricardo2@example.com",
     "password": "contraseña"
 }
 
@@ -48,22 +48,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIyNGFjZ
 ### Crear comercio
 POST http://localhost:3000/api/commerce/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIzOTlhZjlkZmQ4MmI0ZTNmZjUyMWEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzAzODY1MzAsImV4cCI6MTczMDQyMjUzMH0.jI5XBLFqJF69nqWdcnNLzzg6lnzqsk5lQaL494dvppM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzMzNjE3ZDFmZWI2YzFjNzg0ODQ5ZDIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzE0MjA3NDAsImV4cCI6MTczMTQ1Njc0MH0.z-MkuIQesog_8HxX3T_WCV28FW_2w55_QgHuZSTWo0c
 
 {
-    "name": "ejemplo comercio",
-    "cif": "987654321",
-    "email": "comercioejemplo@example.com",
-    "phone": "000000000",
+    "name": "Comercio_final",
+    "cif": "123456788",
+    "email": "comerciofinal@example.com",
+    "phone": "123456788",
     "address": "Dirección del Comercio"
 }
 
 ### Ver comercio
-GET http://localhost:3000/api/commerce/987654321
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+GET http://localhost:3000/api/commerce/123456788
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE0MjA4MDksImV4cCI6MTczMTQ1NjgwOX0.b-31vlXmHdcNB3QtOB156zhiS13frOQKrpi1ymi7Ibs
 
 ### Actualizar comercio
-PUT http://localhost:3000/api/commerce/987654321
+PUT http://localhost:3000/api/commerce/123456788
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
 
@@ -86,12 +86,12 @@ GET http://localhost:3000/api/webCommerce
 
 ### Crear una nueva página web
 POST http://localhost:3000/api/webCommerce
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE0MjA4MDksImV4cCI6MTczMTQ1NjgwOX0.b-31vlXmHdcNB3QtOB156zhiS13frOQKrpi1ymi7Ibs
 Content-Type: application/json
 
 {
-    "city": "Madrid",
-    "activity": "Tecnología",
+    "city": "Badajoz",
+    "activity": "tecnología",
     "title": "Página Web de Tecnología",
     "summary": "Esta es una página dedicada a las últimas noticias y avances en tecnología.",
     "texts": [
@@ -110,8 +110,8 @@ Content-Type: application/json
 }
 
 ### Actualizar una página web por id
-PUT http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+PUT http://localhost:3000/api/webCommerce/673363361feb6c1c784849e4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE0MjA4MDksImV4cCI6MTczMTQ1NjgwOX0.b-31vlXmHdcNB3QtOB156zhiS13frOQKrpi1ymi7Ibs
 Content-Type: application/json
 
 {
@@ -132,7 +132,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1O
 ### PATCH para postear una imagen vinculada a la web
 PATCH http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61/upload
 Content-Type: multipart/form-data; boundary=Boundary
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE0MjA4MDksImV4cCI6MTczMTQ1NjgwOX0.b-31vlXmHdcNB3QtOB156zhiS13frOQKrpi1ymi7Ibs
 
 --Boundary
 Content-Disposition: form-data; name="image"; filename="travis.jpg"
