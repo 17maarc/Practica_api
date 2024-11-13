@@ -1,33 +1,55 @@
-const { check, param } = require('express-validator'); //Importa métodos para validar parámetros y cuerpos de solicitud
+const { body, param, validationResult } = require("express-validator"); // Importa las funciones necesarias de express-validator
+const validateResults = require("../utils/validator"); // Asegúrate de importar validateResults
 
-//Validador para la solicitud GET de una página web a traves del id
-const validateGetWebpage = [
-  param('id').isMongoId().withMessage('El ID de la página web no es válido') 
-];
-
-//Validador para la solicitud POST al crear una nueva web
+// Validación para crear una nueva página web
 const validateCreateWebpage = [
-  check('city').notEmpty().withMessage('La ciudad es obligatoria'), 
-  check('activity').notEmpty().withMessage('La actividad es obligatoria'), 
-  check('title').notEmpty().withMessage('El título es obligatorio'), 
-  check('summary').notEmpty().withMessage('El resumen es obligatorio'), 
-  check('texts').isArray().withMessage('Los textos deben ser un array de cadenas'), 
-  //Valida la puntuación en reviews, si está presente
-  check('reviews.scoring').optional().isFloat({ min: 0, max: 5 }).withMessage('La puntuación debe estar entre 0 y 5'),
-  //Valida que el total de puntuaciones sea un numero válido
-  check('reviews.totalRatings').optional().isInt().withMessage('El número total de puntuaciones debe ser un numero válido'),
-  //Valida que las reseñas sean un array de cadenas
-  check('reviews.reviewTexts').optional().isArray().withMessage('Las reseñas deben ser un array de cadenas')
+  body("city").notEmpty().withMessage("La ciudad es obligatoria"),
+  body("activity").notEmpty().withMessage("La actividad es obligatoria"),
+  body("title").notEmpty().withMessage("El título es obligatorio"),
+  body("summary").notEmpty().withMessage("El resumen es obligatorio"),
+  body("texts").isArray().withMessage("Los textos deben ser un array de cadenas"),
+  body("reviews.scoring").optional().isFloat({ min: 0, max: 5 }).withMessage("La puntuación debe estar entre 0 y 5"),
+  body("reviews.totalRatings").optional().isInt().withMessage("El número total de puntuaciones debe ser un número válido"),
+  body("reviews.reviewTexts").optional().isArray().withMessage("Las reseñas deben ser un array de cadenas"),
+  (req, res, next) => {
+    const errors = validationResult(req); // Obtiene los errores de validación
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() }); // Devuelve errores si los hay
+    next(); // Continúa al siguiente middleware si no hay errores
+  },
 ];
 
-// Validador para la solicitud PUT/UPDATE al actualizar una página web
+// Validación para obtener una página web por ID
+const validateGetWebpage = [
+  param("id").isMongoId().withMessage("El ID de la página web no es válido"),
+  (req, res, next) => {
+    const errors = validationResult(req); // Obtiene los errores de validación
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() }); // Devuelve errores si los hay
+    next(); // Continúa al siguiente middleware si no hay errores
+  },
+];
+
+// Validación para actualizar una página web
 const validateUpdateWebpage = [
-  check('city').optional().notEmpty().withMessage('La ciudad no puede estar vacía'), 
-  check('activity').optional().notEmpty().withMessage('La actividad no puede estar vacía'), 
-  check('title').optional().notEmpty().withMessage('El título no puede estar vacío'), 
-  check('summary').optional().notEmpty().withMessage('El resumen no puede estar vacío'), 
-  check('texts').optional().isArray().withMessage('Los textos deben ser un array de cadenas'),
-  check('images').optional().isArray().withMessage('Las imágenes deben ser un array de URLs')
+  body("city").optional().notEmpty().withMessage("La ciudad no puede estar vacía"),
+  body("activity").optional().notEmpty().withMessage("La actividad no puede estar vacía"),
+  body("title").optional().notEmpty().withMessage("El título no puede estar vacío"),
+  body("summary").optional().notEmpty().withMessage("El resumen no puede estar vacío"),
+  body("texts").optional().isArray().withMessage("Los textos deben ser un array de cadenas")
+    .custom(value => value && !value.every(item => typeof item === "string") ? new Error("Cada texto debe ser una cadena") : true),
+  body("images").optional().isArray().withMessage("Las imágenes deben ser un array de URLs")
+    .custom(value => value && !value.every(item => typeof item === "string" && /^https?:\/\/[^\s]+$/.test(item)) ? new Error("Cada imagen debe ser una URL válida") : true),
+  (req, res, next) => {
+    const errors = validationResult(req); // Obtiene los errores de validación
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() }); // Devuelve errores si los hay
+    next(); // Continúa al siguiente middleware si no hay errores
+  },
 ];
 
-module.exports = { validateGetWebpage, validateCreateWebpage, validateUpdateWebpage }; //Exporta los validadores
+module.exports = {
+  validateCreateWebpage,
+  validateGetWebpage,
+  validateUpdateWebpage,
+};

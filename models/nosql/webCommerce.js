@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const webpageSchema = new mongoose.Schema({ //Aquí basicamente encontramos el esquema de lo que tiene que llevar cada web
+const webpageSchema = new mongoose.Schema({
   city: {
     type: String,
     required: true,
@@ -38,6 +38,11 @@ const webpageSchema = new mongoose.Schema({ //Aquí basicamente encontramos el e
     reviewTexts: {
       type: [String],
     },
+  },
+  commerce: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "commerceModel", 
+    required: true,
   },
 });
 

@@ -6,7 +6,7 @@ const swaggerDocs = require("./docs/swagger.js"); // Documentación de Swagger
 const cors = require('cors'); // Middleware para habilitar CORS
 const morganBody = require("morgan-body"); // Middleware para logging
 const loggerStream = require('./utils/handleLogger'); // Stream para logs
-// const handleHttpError = require('./utils/handleError.js'); // Manejo de errores
+const path = require('path');  // Asegúrate de importar 'path' aquí
 const app = express(); // Crea una instancia de Express
 
 // Configuración de CORS
@@ -27,13 +27,15 @@ morganBody(app, {
 app.use("/api", require("./routes")); // Carga las rutas definidas
 
 // Archivos estáticos
-app.use('/uploads', express.static('uploads')); // Servir archivos estáticos
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.get('/uploads/*', (req, res) => {
+    console.log("Solicitando archivo:", req.url);
+    res.sendFile(path.join(__dirname, req.url));
+});
 
 // Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Configura la documentación de Swagger
-
-// Manejo de errores
-// app.use(handleHttpError); // Asegúrate de que esté habilitado y configurado correctamente
 
 const port = process.env.PORT || 3000; // Establece el puerto
 

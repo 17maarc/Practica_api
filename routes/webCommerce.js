@@ -51,7 +51,7 @@ router.get('/', getWebpages);
  *       404:
  *         description: Página web no encontrada
  */
-router.get('/:id', authMiddleware, getWebpage);
+router.get('/:id', getWebpage);
 
 /**
  * @openapi
@@ -203,6 +203,6 @@ router.get('/:id/interested', authMiddleware, getEmailsByActivity);
  *                   type: string
  *                   example: "https://example.com/images/yourimage.jpg"
  */
-router.patch('/:id/upload', upload.single('image'), UploadImage);
+router.patch('/:id', upload.single('image'), UploadImage);
 
 module.exports = router;
