@@ -3,7 +3,7 @@ const router = express.Router();
 const { validateCreateWebpage, validateUpdateWebpage, validateGetWebpage } = require('../validators/webValidator');
 const validateResults = require('../utils/validator');
 const upload = require('../middleware/multer');
-const { getWebpages, getWebpage, createWebpage, updateWebpage, deleteWebpage, UploadImage, getEmailsByActivity } = require('../controllers/webCommerce');
+const { getWebpages, getWebpage, createWebpage, updateWebpage, deleteWebpage, UploadImage, addReview, getReviews, getInterestedUsers } = require('../controllers/webCommerce');
 const { authMiddleware } = require('../middleware/authJWT');
 
 /**
@@ -137,37 +137,6 @@ router.delete('/:id', validateGetWebpage, validateResults, authMiddleware, delet
 
 /**
  * @openapi
- * /api/webpages/{id}/interested:
- *   get:
- *     summary: Obtiene los correos electrónicos de usuarios interesados en la actividad del comercio
- *     tags: [Webpages]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: ID de la página web del comercio
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Lista de correos electrónicos de usuarios interesados
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: string
- *       401:
- *         description: No autorizado
- *       404:
- *         description: Página web no encontrada
- */
-router.get('/:id/interested', authMiddleware, getEmailsByActivity);
-
-/**
- * @openapi
  * /api/webpages/{id}/upload:
  *   patch:
  *     summary: Sube una imagen para una página web del comercio
@@ -204,5 +173,96 @@ router.get('/:id/interested', authMiddleware, getEmailsByActivity);
  *                   example: "https://example.com/images/yourimage.jpg"
  */
 router.patch('/:id', upload.single('image'), UploadImage);
+
+/**
+ * @openapi
+ * /api/webpages/{id}/reviews:
+ *   post:
+ *     summary: Añade una reseña a una página web
+ *     tags: [Webpages]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la página web para la reseña
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               review:
+ *                 type: string
+ *                 description: Contenido de la reseña
+ *     responses:
+ *       200:
+ *         description: Reseña añadida exitosamente
+ *       400:
+ *         description: Error en los datos de la reseña
+ *       401:
+ *         description: No autorizado
+ */
+router.post('/reviews/:id', addReview);
+
+/**
+ * @openapi
+ * /api/webpages/{id}/reviews:
+ *   get:
+ *     summary: Obtiene todas las reseñas de una página web
+ *     tags: [Webpages]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la página web para obtener las reseñas
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Lista de reseñas obtenida exitosamente
+ *       404:
+ *         description: Página web no encontrada
+ */
+router.get('/reviews/:id', getReviews);
+
+/**
+ * @openapi
+ * /api/webpages/{id}/interested-users:
+ *   get:
+ *     summary: Obtiene los usuarios interesados en una página web (por ciudad e intereses)
+ *     tags: [Webpages]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la página web para obtener los usuarios interesados
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Lista de usuarios interesados obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 correos:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   example: ["user1@example.com", "user2@example.com"]
+ *       404:
+ *         description: Página web no encontrada
+ *       401:
+ *         description: No autorizado
+ */
+router.get('/:id/interested-users', authMiddleware, getInterestedUsers);
 
 module.exports = router;

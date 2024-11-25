@@ -1,0 +1,36 @@
+### Crear comercio
+POST http://localhost:3000/api/commerce/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzQzYTBmODU0OTNmOTc0NzdmZjc1MGQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzI0ODU3OTgsImV4cCI6MTczMjUyMTc5OH0.wQsGWPXBQTLsHF-T4EicIw-DQYW_7c5xllhbmJCBJmE
+
+{
+    "name": "Comercio_final6",
+    "cif": "000000223",
+    "email": "comerciofinal6@example.com",
+    "phone": "123456786",
+    "address": "Dirección del Comercio"
+}
+
+### Ver comercio
+GET http://localhost:3000/api/commerce/000000223
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzI0ODU4ODAsImV4cCI6MTczMjUyMTg4MH0.CKLFBEobgMoUNEEZt4cL-wfBKj-zXkb5XEc66bEpsNA
+
+### Ver comercios
+GET http://localhost:3000/api/commerce
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzMzNjE3ZDFmZWI2YzFjNzg0ODQ5ZDIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzE0NTkzNjgsImV4cCI6MTczMTQ5NTM2OH0.iQyF6xeKArSkVZbL4S0fvudWjmZvrfm9KYJhEsyV8oM
+
+### Actualizar comercio
+PUT http://localhost:3000/api/commerce/123456788
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+{
+    "name": "ejemplo 10000000",
+    "email": "nuevoemail1000@example.com",
+    "phone": "123456784",
+    "address": "mostoles central"
+}
+
+### Eliminar comercio
+DELETE http://localhost:3000/api/commerce/987654321
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM

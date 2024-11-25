@@ -7,6 +7,7 @@ const cors = require('cors'); // Middleware para habilitar CORS
 const morganBody = require("morgan-body"); // Middleware para logging
 const loggerStream = require('./utils/handleLogger'); // Stream para logs
 const path = require('path');  // Asegúrate de importar 'path' aquí
+
 const app = express(); // Crea una instancia de Express
 
 // Configuración de CORS
@@ -37,9 +38,15 @@ app.get('/uploads/*', (req, res) => {
 // Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Configura la documentación de Swagger
 
-const port = process.env.PORT || 3000; // Establece el puerto
+// Exporta la aplicación sin iniciar el servidor
+module.exports = app;
 
-app.listen(port, () => {
-    console.log(`Server is running en el puerto ${port}`); // Log para confirmar que el servidor está corriendo
-    dbConnect(); // Conectar a la base de datos
-});
+// Solo en producción o desarrollo deberías iniciar el servidor
+if (require.main === module) {
+    const port = process.env.PORT || 3000; // Establece el puerto
+
+    app.listen(port, () => {
+        console.log(`Server is running en el puerto ${port}`); // Log para confirmar que el servidor está corriendo
+        dbConnect(); // Conectar a la base de datos
+    });
+}

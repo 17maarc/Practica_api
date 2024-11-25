@@ -1,5 +1,5 @@
 const { body, param, validationResult } = require("express-validator"); // Importa las funciones necesarias de express-validator
-const validateResults = require("../utils/validator"); // Asegúrate de importar validateResults
+const validateResults = require("../utils/validator");
 
 // Validación para crear una nueva página web
 const validateCreateWebpage = [

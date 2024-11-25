@@ -1,0 +1,46 @@
+### Registro de Usuario
+POST http://localhost:3000/api/user/register
+Content-Type: application/json
+
+{
+    "name": "Admin",
+    "email": "Adminemail234@email.com",
+    "password": "contraseña",
+    "age": 20,
+    "city": "Barcelona",
+    "interests": ["deporte"]
+}
+
+### Login de Usuario
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "ricardo3@email.com",
+    "password": "contraseña"
+}
+
+### Actualizar Perfil de Usuario
+PUT http://localhost:3000/api/user/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzMzNjE3ZDFmZWI2YzFjNzg0ODQ5ZDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMTQyMDU0MSwiZXhwIjoxNzMxNDU2NTQxfQ.wc9kEXrnXx8CJsTdBVjFQMA_NUn3J3T0nS38keuv3es
+
+{
+    "name": "ricardo2",
+    "email": "ricardo2@example.com",
+    "age": 30,
+    "city": "Nueva Ciudad"
+}
+
+###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "ricardo2@example.com",
+    "password": "contraseña"
+}
+
+### Eliminar Perfil de Usuario
+DELETE http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIyNGFjZTg3Y2ZkZjVjZTgzZTM4YTMiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNzMwMzAwNzI2LCJleHAiOjE3MzAzMDc5MjZ9.WQGKUAzKUiFrLAVXxGIV99ubxwJZ7WzL3taUEM9vdsA

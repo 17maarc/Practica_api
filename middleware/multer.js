@@ -7,7 +7,6 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/'); // Directorio donde se almacenarán los archivos
     },
-    // Generar un nombre único para cada archivo con un sufijo (1), (2), ...
     filename: (req, file, cb) => {
         const originalName = file.originalname.split('.')[0]; // Nombre original del archivo sin extensión
         const ext = file.originalname.split('.').pop(); // Extensión del archivo
@@ -16,7 +15,7 @@ const storage = multer.diskStorage({
         // Verificamos si el archivo ya existe en la carpeta uploads/
         let counter = 1;
         while (fs.existsSync(`uploads/${filename}`)) {
-            filename = `${originalName}(${counter}).${ext}`; // Si existe, agregar (1), (2), ...
+            filename = `${originalName}(${counter}).${ext}`; 
             counter++;
         }
 

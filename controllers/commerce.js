@@ -1,4 +1,4 @@
-const { commerceModel } = require('../models');
+const { commerceModel, userModel } = require('../models');
 const jwt = require('jsonwebtoken')
 const {matchedData} = require('express-validator')
 const { tokenSign, verifyToken } = require("../middleware/authJWT");
@@ -70,7 +70,7 @@ const updateItem = async (req, res) => {
         // Actualizar el comercio en la base de datos
         const updatedCommerce = await commerceModel.findOneAndUpdate(
             { cif: cif, jwt: token },  // Asegúrate de que estés utilizando el CIF correcto
-            { $set: req.body },  // Aquí puedes establecer los campos que deseas actualizar
+            { $set: req.body }, 
             { new: true }  // Devuelve el documento actualizado
         );
 
@@ -113,4 +113,43 @@ const deleteItem = async (req, res) => {
     }
 };
 
-module.exports = { getItems, getItem, createItem, updateItem, deleteItem }; //Exporto las funciones para que puedan ser utilizadas en otros modulos.
+const getInterestedUsers = async (req, res) => {
+    try {
+      const { cif } = req.params;  
+      const token = req.headers.authorization?.split(" ")[1];
+      const decoded = verifyToken(token);
+  
+      if (!decoded) {
+        return res.status(401).json({ message: "Token inválido" });
+      }
+  
+      // Buscar el comercio por CIF
+      const comercio = await commerceModel.findOne({ cif, jwt: token });
+  
+      if (!comercio) {
+        return res.status(404).json({ message: "Comercio no encontrado" });
+      }
+  
+      // Buscar usuarios en la misma ciudad y que coincidan con los intereses del comercio
+      const usuarios = await userModel.find({
+        city: comercio.ciudad,  // Verifica si la ciudad coincide
+        offers: true,  // Verifica que el usuario quiera recibir ofertas
+        interests: { $in: comercio.actividades }  // Coincide intereses con las actividades del comercio
+      });
+  
+      if (usuarios.length === 0) {
+        return res.status(404).json({ message: "No se encontraron usuarios interesados" });
+      }
+  
+      // Extraer los correos de los usuarios encontrados
+      const correos = usuarios.map(user => user.email);
+  
+      res.status(200).json({ correos });
+    } catch (error) {
+      console.error("Error al obtener usuarios interesados:", error);
+      res.status(500).json({ message: "Error al obtener usuarios interesados", error });
+    }
+  };
+  
+
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem, getInterestedUsers }; //Exporto las funciones para que puedan ser utilizadas en otros modulos.

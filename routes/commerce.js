@@ -1,6 +1,6 @@
 const express = require("express"); // Importa el módulo Express
 const router = express.Router(); // Crea un nuevo router de Express
-const { getItems, getItem, createItem, updateItem, deleteItem } = require("../controllers/commerce"); // Importa los controladores para manejar las operaciones
+const { getItems, getItem, createItem, updateItem, deleteItem, getInterestedUsers } = require("../controllers/commerce"); // Importa los controladores para manejar las operaciones
 const { validateGetItem, validateCreateItem, validateUpdateItem, validateDeleteItem } = require('../validators/commerceValidator'); // Importa los validadores
 const validateResults = require('../utils/validator'); // Importa el middleware que maneja los resultados de validación
 const { authMiddleware } = require('../middleware/authJWT');
@@ -143,4 +143,38 @@ router.put("/:cif", validateUpdateItem, validateResults, authMiddleware, updateI
  */
 router.delete("/:cif", validateDeleteItem, validateResults, authMiddleware, deleteItem); // Eliminar un comercio usando su CIF
 
-module.exports = router; // Exporta las rutas definidas para su uso en otras partes de la aplicación
+/**
+ * @openapi
+ * /api/commerce/{cif}/interested-users:
+ *   get:
+ *     summary: Obtener los usuarios interesados en las actividades de un comercio
+ *     tags: [Commerce]
+ *     parameters:
+ *       - in: path
+ *         name: cif
+ *         required: true
+ *         description: CIF del comercio para obtener los usuarios interesados
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Usuarios interesados obtenidos exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 correos:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *       404:
+ *         description: Comercio no encontrado o no hay usuarios interesados
+ *       401:
+ *         description: No autorizado
+ */
+router.get("/:cif/interested-users", authMiddleware, getInterestedUsers); // Obtener usuarios interesados en un comercio
+
+module.exports = router;

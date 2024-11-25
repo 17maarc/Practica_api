@@ -1,0 +1,69 @@
+### Ver todas las webs
+GET http://localhost:3000/api/webCommerce
+
+### Ver una web por su id
+GET http://localhost:3000/api/webCommerce/6733ebefc16f379f5f4ce4ff
+
+### Crear una nueva página web
+POST http://localhost:3000/api/webCommerce
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE0MjI5ODQsImV4cCI6MTczMTQ1ODk4NH0.ms9SV3xgaidKR_hoHtotFPecEO0l9og0V542CkQgc6U
+Content-Type: application/json
+
+{
+   "city": "Barcelona",
+   "activity": "deporte",
+   "title": "Página Web de Deportes y Ejercicio",
+   "summary": "Una página enfocada en ofrecer consejos y rutinas de ejercicios para mejorar tu rendimiento físico.",
+   "texts": [
+      "Consejo 1: Realiza entrenamientos de fuerza para mejorar tu resistencia.",
+      "Consejo 2: La nutrición adecuada es esencial para un buen rendimiento deportivo."
+   ],
+   "images": [],
+   "reviews": {
+      "scoring": 5,
+      "totalRatings": 20,
+      "reviewTexts": [
+         "Muy útil para mantenerme motivado a hacer ejercicio.",
+         "Excelente página, con rutinas de ejercicio muy variadas."
+      ]
+   }
+}
+
+### Actualizar una página web por id
+PUT http://localhost:3000/api/webCommerce/6733725d1e5c163c8a43a966
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE0MjA4MDksImV4cCI6MTczMTQ1NjgwOX0.b-31vlXmHdcNB3QtOB156zhiS13frOQKrpi1ymi7Ibs
+Content-Type: application/json
+
+{
+    "city": "Madrid",
+    "title": "Página Web de Innovación Tecnológica"
+}
+
+
+### Eliminar una página web (borrado logico)
+DELETE http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61?soft=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### Borrado fisico
+DELETE http://localhost:3000/api/webCommerce/6723b70a273671525e77cc61
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzAzODY1ODksImV4cCI6MTczMDQyMjU4OX0.SNTK6aYR25fSe3X4joWnZsEhiFM6ykeUVxQImHK9JTM
+
+### Subir imagen
+### PATCH para postear una imagen vinculada a la web
+PATCH http://localhost:3000/api/webCommerce/6733725d1e5c163c8a43a966
+Content-Type: multipart/form-data; boundary=Boundary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzMzNjE3ZDFmZWI2YzFjNzg0ODQ5ZDIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzE0NTkzNjgsImV4cCI6MTczMTQ5NTM2OH0.iQyF6xeKArSkVZbL4S0fvudWjmZvrfm9KYJhEsyV8oM
+
+--Boundary
+Content-Disposition: form-data; name="image"; filename="travis.jpg"
+Content-Type: image/jpg
+
+< ./travis.jpg
+--Boundary--
+>
+
+
+### Ver correos
+GET http://localhost:3000/api/webCommerce/6733ebefc16f379f5f4ce4ff/interested-users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzQzYTBmODU0OTNmOTc0NzdmZjc1MGQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzI0OTkyNDksImV4cCI6MTczMjUzNTI0OX0.p4Jn2DFT3QbPUQeJDZk0y4gOf-BWWyOVN7-NouyWVIA
+Content-Type: application/json
